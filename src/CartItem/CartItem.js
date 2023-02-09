@@ -15,15 +15,14 @@ module.exports = class CartItem {
 
     //region public methods
     constructor(articleId, name, quantity, price){
-        try{
-            this.#articleId = articleId
-            this.#name = name;
-            this.#quantity = quantity;
-            this.#price = price;
-        }
-        catch(error){
-            throw new InvalidArticleIdException();
-        }
+        if(articleId < 1) throw new InvalidArticleIdException()
+        if(quantity < 1) throw new InvalidQuantityException()
+        if(price < quantity) throw new InvalidPriceException()
+
+        this.#articleId = articleId
+        this.#name = name
+        this.#quantity = quantity
+        this.#price = price
         
     }
 
@@ -51,7 +50,7 @@ module.exports = class CartItem {
     }
 
     set price(value) {
-        if(value < 0){
+        if(value < this.#quantity){
             throw new InvalidPriceException();
         }
         this.#price = value;
