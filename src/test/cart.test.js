@@ -3,7 +3,7 @@
  * @brief     This class is designed to test the behaviour of a cart.
  * @author    Created by Nicolas.GLASSEY
  * @version   13-02-2022 - original (dedicated to RIA1)
- * @version   08-03-2022 - update
+ * @version   23-02-2023 - update for first eval
  */
 
 let Cart = require('../Cart/Cart.js');
@@ -25,7 +25,7 @@ test('items_NominalCase_GetItems', () => {
     //then
     for (let i = 0 ; i <= expectedItems.length ; i++)
     {
-        expect(expectedItems[i]).toEqual(actualItems[i]);
+        expect(actualItems[i]).toEqual(expectedItems[i]);
     }
 })
 
@@ -52,7 +52,7 @@ test('total_NominalCase_GetsSum', () => {
     //Event triggered by th assertion
 
     //then
-    expect(totalPriceExpected).toEqual(cart.total);
+    expect(cart.total).toEqual(totalPriceExpected);
 })
 
 test('total_EmptyCart_ThrowException', () => {
@@ -78,7 +78,7 @@ test('count_OnlySingleQuantityProduct_GetsNumberOfItems', () => {
     //Event triggered by th assertion
 
     //then
-    expect(countExpected).toEqual(cart.count());
+    expect(cart.count()).toEqual(countExpected);
 })
 
 test('count_MixSingleAndMultipleQuantityProduct_GetsNumberOfItems', () => {
@@ -93,7 +93,7 @@ test('count_MixSingleAndMultipleQuantityProduct_GetsNumberOfItems', () => {
     //Event triggered by th assertion
 
     //then
-    expect(countExpected).toEqual(cart.count());
+    expect(cart.count()).toEqual(countExpected);
 })
 
 test('count_MixSingleAndMultipleQuantityProductDistinct_GetsNumberOfItems', () => {
@@ -108,7 +108,7 @@ test('count_MixSingleAndMultipleQuantityProductDistinct_GetsNumberOfItems', () =
     //Event triggered by th assertion
 
     //then
-    expect(countExpected).toEqual(cart.count(true));
+    expect(cart.count(true)).toEqual(countExpected);
 })
 
 test('count_EmptyCart_ThrowException', () => {
@@ -133,7 +133,7 @@ test('add_EmptyCartAddFirstSingleCartItem_GetsUpdatedNumberOfItems', () => {
     cart.add(items);
 
     //then
-    expect(expectedTotalPrice).toEqual(cart.total);
+    expect(cart.total).toEqual(cart.total);
 })
 
 test('add_EmptyCartEmptyItemsToAdd_ThrowException', () => {

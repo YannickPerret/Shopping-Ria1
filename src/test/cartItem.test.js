@@ -89,8 +89,8 @@ test('quantity_setQuantityNominalCase_Success', () => {
     cartItem.quantity = expectedQuantity;
 
     //then
-    expect(expectedQuantity).toEqual(cartItem.quantity);
-    expect(expectedTotal).toEqual(cartItem.total);
+    expect(cartItem.quantity).toEqual(expectedQuantity);
+    expect(cartItem.total).toEqual(expectedTotal);
 })
 
 test('quantity_setQuantityInvalidValue_ThrowException', () => {
@@ -123,8 +123,8 @@ test('price_setPriceNominalCase_Success', () => {
     cartItem.price = expectedPrice;
 
     //then
-    expect(expectedPrice).toEqual(cartItem.price);
-    expect(expectedTotal).toEqual(cartItem.total);
+    expect(cartItem.price).toEqual(expectedPrice);
+    expect(cartItem.total).toEqual(expectedTotal);
 })
 
 test('price_setPriceInvalidPrice_ThrowException', () => {
