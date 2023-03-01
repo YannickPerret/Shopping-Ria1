@@ -2,25 +2,40 @@
 
 const EmptyCartException = require("../Cart/EmptyCartException.js");
 const UpdateCartException = require("../Cart/UpdateCartException.js");
+const MultipleCurrenciesException = require("../Cart/MultipleCurrenciesException.js");
 const CartItem = require("../CartItem/CartItem.js");
 
 module.exports = class Cart {
 
     #items = [];
+    #currency = "CHF";
+    #total = 0;
 
     constructor(items) {
-        this.#items = items || [];
+        this.add(items)
+        this.#currency = this.#items.length > 0 ? this.#items[0].currency : "CHF";
+
+        //this.#items = items || [];
+        this.#total = 0;
     }
 
     get total() {
-        return this.items.reduce((total, item) => total + item.total, 0);
+        if ( this.#items.length > 0) {
+            return this.items.reduce((total, item) => total + item.total, 0);
+        } else {
+            return this.#total;
+        }
     }
 
     get items() {
         if(this.#items.length === 0) {
-            throw new EmptyCartException();
+            return [];
         }
         return this.#items;
+    }
+    
+    get currency() {
+        return this.#currency;
     }
 
     count(distinct) {
@@ -34,14 +49,22 @@ module.exports = class Cart {
 
     add(items) {
         if(!items || items.length <= 0) {
-            throw new UpdateCartException();
+            return [];
         }
+        if (this.#items.length === 0) {
+            this.#currency = items[0].currency;
+        }
+
         items.map((item) => {
             if(item instanceof CartItem === false)
                 throw new UpdateCartException();
             else
+                if (item.currency !== this.#currency) {
+                    throw new MultipleCurrenciesException();
+                }
                 this.#items.push(item)
         });
+
     }
 
     remove (item) {
