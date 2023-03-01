@@ -3,7 +3,6 @@
 const UpdateCartException = require("../Cart/UpdateCartException.js");
 const MultipleCurrenciesException = require("../Cart/MultipleCurrenciesException.js");
 const CartItem = require("../CartItem/CartItem.js");
-const EmptyCartException = require("./EmptyCartException.js");
 
 module.exports = class Cart {
 
