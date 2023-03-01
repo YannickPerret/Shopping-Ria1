@@ -47,7 +47,7 @@ module.exports = class Cart {
 
     add(items) {
         if(!items || items.length <= 0) {
-            return
+            return 
         }
         if (this.#items.length === 0) {
             this.#currency = items[0].currency;
