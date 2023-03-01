@@ -14,8 +14,6 @@ module.exports = class Cart {
     constructor(items) {
         this.add(items)
         this.#currency = this.#items.length > 0 ? this.#items[0].currency : "CHF";
-
-        //this.#items = items || [];
         this.#total = 0;
     }
 
