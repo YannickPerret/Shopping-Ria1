@@ -45,22 +45,25 @@ module.exports = class Cart {
     
 
     add(items) {
-        if(!items || items.length <= 0) {
-            return 
-        }
-        if (this.#items.length === 0) {
-            this.#currency = items[0].currency;
+        // si l'item est un tableau et qu'il contient au moins un élément
+        if (Array.isArray(items) && items.length > 0) {
+
+            if (this.#items.length === 0) {
+                this.#currency = items[0].currency;
+            }
+
+            items.map((item) => {
+                if(item instanceof CartItem === false)
+                    throw new UpdateCartException();
+                else
+                    if (item.currency !== this.#currency) {
+                        throw new MultipleCurrenciesException();
+                    }
+                    this.#items.push(item)
+            });
         }
 
-        items.map((item) => {
-            if(item instanceof CartItem === false)
-                throw new UpdateCartException();
-            else
-                if (item.currency !== this.#currency) {
-                    throw new MultipleCurrenciesException();
-                }
-                this.#items.push(item)
-        });
+        return ;
 
     }
 
