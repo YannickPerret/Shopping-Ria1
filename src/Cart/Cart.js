@@ -1,9 +1,9 @@
 "use strict";
 
-const EmptyCartException = require("../Cart/EmptyCartException.js");
 const UpdateCartException = require("../Cart/UpdateCartException.js");
 const MultipleCurrenciesException = require("../Cart/MultipleCurrenciesException.js");
 const CartItem = require("../CartItem/CartItem.js");
+const EmptyCartException = require("./EmptyCartException.js");
 
 module.exports = class Cart {
 
@@ -47,7 +47,7 @@ module.exports = class Cart {
 
     add(items) {
         if(!items || items.length <= 0) {
-            return [];
+            return
         }
         if (this.#items.length === 0) {
             this.#currency = items[0].currency;
